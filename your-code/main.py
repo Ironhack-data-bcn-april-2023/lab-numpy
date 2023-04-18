@@ -1,68 +1,93 @@
 #1. Import the NUMPY package under the name np.
 
-
+import numpy as np
+import random
 
 #2. Print the NUMPY version and the configuration.
 
-
+print("NumPy version:", np.__version__)
+print("\nNumPy configuration:")
+np.show_config()
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
+# a = np.random.rand(2, 3, 5)
+# a = np.random.randn(2, 3, 5)
+
+a = np.random.randint(10, size=(2, 3, 5)) 
 
 
 #4. Print a.
 
+print(a)
 
 
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
-
+b = np.ones((5, 2, 3)) 
 
 #6. Print b.
 
+print(b)
 
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
+#Yes, both sizes are 30.
 
-
+print(a.size)
+print(b.size)
+print(a.size==b.size)
 
 #8. Are you able to add a and b? Why or why not?
 
+#print(a+b)
 
+#No, because they are different shapes, one is (2,3,5) and the other one is (5,2,3)
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
+#5,2,3 -> 2x3x5 
 
+c = b.transpose(1,2,0)
 
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
-
+d=(a+c)
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
-
-
+print(a)
+print(d)
+# a has int numbers and d has float numbers.
 
 #12. Multiply a and c. Assign the result to e.
 
-
+e= (a*c)
 
 #13. Does e equal to a? Why or why not?
 
-
+print(a==e)
+#yes, all values are the same, but a are int and e are floats.
 
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
+d_max=np.max(d)
+print(d_max)
 
+d_min=np.min(d)
+print(d_min)
+
+d_mean=np.mean(d)
+print(d_mean)
 
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
-
+f = np.empty((2, 3, 5))
 
 
 """
@@ -75,7 +100,18 @@ In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
 
-
+for i in d:
+    for y in i:
+        for x in y:
+            if x>d_mean and x<d_max:
+                f[x]=75
+            elif x==d_mean:
+                f[x]=50
+            elif x==d_mean:
+                f[x]=0
+            elif x==d_max:
+                f[x]=100
+            
 
 
 """
@@ -98,7 +134,8 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 75.,  75.,  75.,  75.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
-
+print(d)
+print(f)
 
 """
 #18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
